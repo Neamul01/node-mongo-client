@@ -3,12 +3,15 @@ import { useParams } from 'react-router-dom';
 
 const UpdateUser = () => {
     const { id } = useParams();
-    const [user, setUser] = useState();
+    const [user, setUser] = useState({});
     useEffect(() => {
-        fetch(`http://localhost:5000/user/${id}`)
+        const url = `http://localhost:5000/user/${id}`;
+        fetch(url)
             .then(res => res.json())
-            .then(data => setUser(data))
+            .then(data => setUser(data));
     }, [])
+    console.log(id)
+
     return (
         <div>
             <h2>Updation Users {user?.name} </h2>

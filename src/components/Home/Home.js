@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-    const [users, setUsers] = useState();
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
         fetch('http://localhost:5000/user')
@@ -28,6 +28,7 @@ const Home = () => {
                     }
                 })
         }
+
     }
     return (
         <div>
@@ -37,9 +38,14 @@ const Home = () => {
                     users?.map(user => <li
                         key={user._id}
                     >{user.name} :: {user.email}
-                        <Link to={`/update/:${user._id}`}><button>Update</button></Link>
-                        <button onClick={() => handleUserDelete(user._id)}>X</button> </li>)
+                        <Link to={`/update/${user._id}`}><button>Update</button></Link>
+                        <button onClick={() => handleUserDelete(user._id)}>X</button>
+                    </li>
+                    )
                 }
+                {/* {
+                    users.map(user => <p>{user.name}</p>)
+                } */}
             </ul>
         </div>
     );
